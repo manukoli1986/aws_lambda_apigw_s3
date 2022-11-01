@@ -4,6 +4,12 @@ output "lambda_bucket_name" {
   value = aws_s3_bucket.lambda_bucket.id
 }
 
+output "output_bucket_name" {
+  description = "Name of the S3 bucket used to save output of lambda function."
+
+  value = aws_s3_bucket.output_bucket.id
+}
+
 output "function_name" {
   description = "Name of the Lambda function."
 
