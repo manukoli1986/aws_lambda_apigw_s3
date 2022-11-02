@@ -12,8 +12,6 @@ bucketName = "python-store-output-in-bucket"
 s3 = boto3.resource('s3')
 
 # Samepl payload={"Id": 123456, "Age": 70, "Sex": "male"} 
-
-
 def createBucket(bucketName,event):
     fileName = event['Id']
     obj = s3.Object(bucketName,str(event['Id'])+'.json')
@@ -21,16 +19,23 @@ def createBucket(bucketName,event):
     
 
 def lambda_handler(event, context):
-    # TODO implement
-    # Age = event['Age']
-    # if Age >= 50 and Age <= 100:
-    if event['Age'] >= 50 and event['Age'] <= 100:
-        createBucket(bucketName,event)
-        print("The object is created with {}.json name in bucket {}".format(event['Id'],bucketName))
-    else:
-        print("This is wrong {} age".format(event['Age']))
-    return {
-        'statusCode': 200,
-        'body': json.dumps(event)
-    }
+    # # TODO implement
     
+    decodeEvent = json.loads(event['body'])
+    Age = decodeEvent['Age']
+    
+    if int(Age) >= 50 and int(Age) <= 100:
+        createBucket(bucketName,decodeEvent)
+        print("The object is created with {}.json name in bucket {}".format(decodeEvent['Id'],bucketName))
+        message = "Successfully Created File."
+        return { 
+            'statusCode': 200,
+            'body': message
+        }
+    else:
+        print("This is wrong {} age".format(decodeEvent['Age']))
+        message = "Age should be between 50 to 100."
+        return {
+            'statusCode': 500,
+            'body': message
+        }
