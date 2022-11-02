@@ -37,3 +37,31 @@ terraform plan  #To verify
 terraform apply -auto-approve
 ```
 
+## Output
+```
+base_url = "https://d0fluaj0gk.execute-api.ap-south-1.amazonaws.com/serverless_lambda_stage"
+function_name = "python"
+lambda_bucket_name = "myfunctions-wrongly-uniquely-merry-eagle"
+output_bucket_name = "python-store-output-in-bucket"
+```
+
+### Run Curl command to check it.
+```
+curl --location --request POST 'https://d0fluaj0gk.execute-api.ap-south-1.amazonaws.com/serverless_lambda_stage/hello' \
+> --header 'Content-Type: application/json' \
+> --data-raw '{
+>     "Id": 1232324324,
+>     "Age": 59,
+>     "Sex": "male"
+> }'
+Successfully Created File.      
+
+curl --location --request POST 'https://d0fluaj0gk.execute-api.ap-south-1.amazonaws.com/serverless_lambda_stage/hello' --header 'Content-Type: application/json' --data-raw '{
+    "Id": 1232324324,
+    "Age": 109,
+    "Sex": "male"
+}'
+Age should be between 50 to 100.
+```
+
+
