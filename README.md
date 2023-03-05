@@ -1,4 +1,4 @@
-# DevOps1
+# aws_lambda_apigw_s3
  Goals 
  The goals of this small homework are: 
  1. To measure your Infrastructure as Code (IaC) knowledge, 
